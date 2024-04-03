@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Management</title>
+    <style>
+        th, td {
+            border: 1px solid;
+            padding: 10px;
+            text-align: center;
+        }
+        table {
+            border-collapse: collapse;
+        }
+
+        #loading-icon {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            display: none;
+        }
+        #loading-icon img {
+            width: 70px;
+            height: auto;
+        }
+        .logout-icon-container {
+            position: absolute;
+            top: 2px;
+            right: 40px;
+            cursor: pointer;
+            text-align: center;
+            color: #333;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .logout-icon {
+            margin-bottom: 5px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<nav>
+    <div class="nav-wrapper" style="font-size:30px; font-weight:600; margin-left:15px">
+        <div class="logout-icon-container" id="logout-icon-container">
+            <span style="color:white;font-size:17px">Logout</span>
+        </div>
+        Lead Details
+    </div>
+</nav>
+<div id="loading-icon">
+    <img src="loading.gif" alt="Loading...">
+</div>
+<div class="container">
+    <div>
+        <table class="highlight" style="margin-top:30px">
+            <thead>
+            <tr>
+                <th>Last name</th>
+                <th>Company</th>
+                <th>Email</th>
+            </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function showLoadingIcon() {
+        document.getElementById("loading-icon").style.display = "block";
+    }
+
+    function hideLoadingIcon() {
+        document.getElementById("loading-icon").style.display = "none";
+    }
+
+    function populateTable(leads) {
+        const tbody = document.getElementById('tbody');
+        for (let lead of leads) {
+            const row = document.createElement("tr");
+
+            function addCell(value) {
+                const cell = document.createElement("td");
+                cell.textContent = value
+                row.appendChild(cell);
+            }
+
+            addCell(lead.keyValues.Last_Name)
+            addCell(lead.keyValues.Company)
+            addCell(lead.keyValues.Email)
+
+            tbody.appendChild(row)
+        }
+
+        hideLoadingIcon();
+    }
+
+    showLoadingIcon();
+
+    fetch('/api/v1/leads' + document.location.search)
+        .then(response => response.json())
+        .then(response => populateTable(response.data))
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            hideLoadingIcon();
+        });
+
+
+    document.getElementById('logout-icon-container').addEventListener('click', function()
+    {
+        window.location.href = '/logout';
+    });
+</script>
+
+</body>
+</html>

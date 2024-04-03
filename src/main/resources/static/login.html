@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoho CRM Sign In</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            width: 400px;
+            margin: 100px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .app-name {
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .sign-in-text {
+            margin-bottom: 20px;
+            display: inline-block;
+            vertical-align: middle;
+            font-family: 'Times New Roman';
+            font-size: 18px;
+        }
+
+        .zoho-logo {
+            margin-bottom: 20px;
+            cursor: pointer;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .zoho-logo img {
+            width: 100px;
+        }
+
+        .zoho-logo:hover img {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="app-name">Lead Management</div>
+    <div class="sign-in-text">Sign in with</div>
+    <div class="zoho-logo">
+        <a href="https://accounts.zoho.com/oauth/v2/auth?client_id=1000.C9E6WHLM0A6E0PVBT46POBWNHORBOP&response_type=code&redirect_uri=http://localhost:8001/oauthredirect&scope=ZohoCRM.modules.READ,ZohoCRM.settings.READ,ZohoCRM.users.READ&access_type=offline&prompt=consent">
+            <img src="zoho-logo.png" alt="Zoho Logo">
+        </a>
+    </div>
+</div>
+
+</body>
+</html>
